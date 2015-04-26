@@ -1,0 +1,210 @@
+﻿html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/*Lists*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.dg {
+    color: #1F1F1F;
+    font-size: 13px;
+    font-family: "Segoe UI", Helvetica, Arial, "Sans-Serif";
+    width: 260px;
+    display: inline-block;
+    margin-right: 28px;
+    white-space: initial;
+}
+
+    .dg ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        clear: both;
+    }
+
+    .dg li.title {
+        padding-left: 16px;
+        background: #2D2D30;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .dg .cr.number {
+        height: 35px;
+        padding: 2px;
+    }
+
+    .dg .c {
+        float: left;
+        width: 168px;
+    }
+
+    .dg .cs {
+        float: left;
+        width: 30%;
+    }
+
+    .dg .slider {
+        float: left;
+        width: 150px;
+        margin-right: 0;
+        margin-top: 3px;
+    }
+
+    .dg .property-name {
+        cursor: default;
+        float: left;
+        clear: left;
+        width: 75px;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        padding: 6px;
+    }
+
+    .dg .cs input[type=text] {
+        background: #3c3c3c;
+        margin-top: 5px;
+    }
+
+    .dg .property-namebis {
+        cursor: default;
+        float: left;
+        clear: left;
+        width: 50%;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        padding: 4px;
+    }
+
+    .dg .cr.number input[type=text] {
+        color: #007ACC;
+    }
+
+
+    .dg .c input[type=text] {
+        background: #303030;
+        outline: none;
+        border: 0;
+        margin-top: 6px;
+        padding: 3px;
+        width: 100%;
+        float: right;
+    }
+
+    .dg .has-slider input[type=text] {
+        width: 50px;
+        margin-left: 0;
+    }
+
+.textures {
+    padding: 3px;
+}
+
+#viewport {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top:177px;
+}
+
+
+#menubar {
+    position: absolute;
+    width: 100%;
+    height: 65px;
+    background-color: #2D2D30;
+    padding: 0;
+    margin-left: 320px;
+}
+
+#sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    background-color: #2D2D30;
+    overflow: auto;
+}
+
+#algos {
+    padding: 34px;
+}
+
+    #algos select {
+        border: 0 !important; /*Removes border*/
+        background: #293955 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAYAAABCxiV9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACNJREFUeNpi/A8EDDgAExAz4pBjZIIx0CVgOhnQFMAVAgQYAMeJBAoARyDLAAAAAElFTkSuQmCC') /*../../assets/images/select-arrow.png*/ no-repeat 90% center;
+        width: 130px; /*Width of select dropdown to give space for arrow image*/
+        text-indent: 0.01px;
+        color: #FFF;
+        -moz-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        border-radius: 15px;
+        padding: 5px;
+        -moz-box-shadow: inset 0 0 5px rgba(000,000,000, 0.5);
+        -webkit-box-shadow: inset 0 0 5px rgba(000,000,000, 0.5);
+        box-shadow: inset 0 0 5px rgba(000,000,000, 0.5);
+        font-size: 13px;
+        font-family: "Segoe UI", Helvetica, Arial, "Sans-Serif";
+    }
+
+
+input[type=checkbox] {
+    display:none;
+}
+
+.checkbox {
+    
+    display: inline-block;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 10px;
+    line-height: 18px;
+}
+
+    .checkbox:before {
+        content: "";
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        vertical-align: middle;
+        background-color: #0088cc;
+        color: #f3f3f3;
+        text-align: center;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+.checkbox.checked:before {
+    
+    content: "\2713";
+
+}
+
+

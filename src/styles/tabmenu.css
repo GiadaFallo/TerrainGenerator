@@ -1,0 +1,231 @@
+﻿#cssmenu,
+#cssmenu ul,
+#cssmenu ul #singlelink,
+#cssmenu ul #singlelink a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    line-height: 1;
+    display: block;
+    position: relative;
+    font-family: Capriola, Helvetica, sans-serif;
+}
+
+#cssmenu {
+    width: auto;
+    height: 30px;
+}
+
+    #cssmenu.align-right {
+        float: right;
+    }
+
+        #cssmenu.align-right ul li {
+            float: right;
+            margin-right: 0;
+            margin-left: 4px;
+        }
+
+    #cssmenu #bg-one,
+    #cssmenu #bg-two,
+    #cssmenu #bg-three,
+    #cssmenu #bg-four {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    #cssmenu #bg-one {
+        height: 2px;
+        background: #1C97EA;
+        z-index: 4;
+    }
+
+
+    #cssmenu #bg-three {
+        height: 30px;
+        /*z-index: 3;*/
+        background: #293955;
+    }
+
+
+
+    #cssmenu ul {
+        height: 30px;
+    }
+
+        #cssmenu ul #singlelink {
+            margin-right: 4px;
+            /*z-index: 5;*/
+        }
+
+            #cssmenu ul #singlelink a {
+                padding: 10px 28px 12px 18px;
+                margin-bottom: 2px;
+                color: #eeeeee;
+                font-size: 13px;
+                text-decoration: none;
+            }
+
+
+            #cssmenu ul #singlelink:hover{
+                 background:#5B7199;
+                 height: 28px;
+
+            }
+            #cssmenu ul #singlelink.active {
+                background: #1C97EA;
+            }
+
+                #cssmenu ul #singlelink a:hover,
+                #cssmenu ul #singlelink.active > a {
+                    background: url('../../assets/images/bg.png');
+                    color: #ffffff;
+                }
+
+
+                
+#cssmenu ul#zoneul {
+    height:160px;
+}
+
+
+#raiselower {
+    
+    margin-left:60px;
+
+}
+
+/*----- Tabs -----*/
+.tabs {
+    width:100%;
+    display:inline-block;
+}
+ 
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+        margin:0px 5px;
+        float:left;
+        list-style:none;
+    }
+
+.tab-links a {
+    padding: 9px 15px;
+    display: inline-block;
+    -moz-border-radius: 3px 3px 0px 0px;
+    -webkit-border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+    color: #4c4c4c;
+    -moz-transition: all linear 0.15s;
+    -o-transition: all linear 0.15s;
+    -webkit-transition: all linear 0.15s;
+    transition: all linear 0.15s;
+}
+ 
+        .tab-links a:hover {
+            background:#a7cce5;
+            text-decoration:none;
+        }
+ 
+    li.active a, li.active a:hover {
+        background:#fff;
+        color:#4c4c4c;
+    }
+ 
+    /*----- Content of Tabs -----*/
+.tab-content {
+    padding: 2px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: -1px 1px 1px rgba(0,0,0,0.15);
+    -webkit-box-shadow: -1px 1px 1px rgba(0,0,0,0.15);
+    box-shadow: -1px 1px 1px rgba(0,0,0,0.15);
+    background: #D6DBE9;
+    height: 140px;
+    white-space: nowrap;
+}
+ 
+        .tab {
+            display:none;
+            position:relative;
+        }
+ 
+        .tab.active {
+            display:block;
+            position:relative;
+        }
+
+        #menu {
+            padding: 20px;      
+        }
+ 
+        #menu ul {
+            padding: 0;
+            margin: 0;
+        }
+ 
+        #menu li {
+            position: relative;
+            float: left;
+            width: 168px;
+            text-align: center;
+            list-style: none;
+        }
+ 
+        #menu li a {
+            background-color: #293955;
+            color: #FFF;
+            padding: 8px 20px;
+            text-decoration: none;
+            display: block;
+        }
+ 
+        #menu li a:hover {
+            background-color:  #2196E5;
+        }
+ 
+        #menu ul ul {
+            top: 48px;
+            visibility: hidden;
+            z-index: 100;
+        }
+ 
+        #menu ul li:hover ul {
+            visibility: visible;
+        }
+ 
+ 
+        #menu ul ul li a {
+            background-color: #293955;
+        }
+ 
+        #menu ul ul li a:hover {
+            background-color:  #2196E5;
+        }
+
+       
+       .close {
+	       background: #293955;
+	       color: #FFFFFF;
+	       line-height: 25px;
+	       position: absolute;
+	       text-align: center;
+	       width: 40px;
+	       text-decoration: none;
+           top: 110px;
+           left: 320px;
+        }
+
+        .close:hover { 
+            background: #1C97EA; 
+            cursor: pointer;
+        }
