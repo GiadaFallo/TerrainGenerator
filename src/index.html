@@ -1,0 +1,572 @@
+﻿<!DOCTYPE html>
+
+<html lang="it" ondragstart="return false;" onmousemove="return false;" ondrop="return false;">
+
+
+<head>
+
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--Adding style sheets-->
+    <link href="styles/button.css" rel="stylesheet" type="text/css">
+    <link href="styles/general.css" rel="stylesheet" type="text/css">
+    <link href="styles/icons.css" rel="stylesheet" type="text/css">
+    <link href="styles/simpleslider.css" rel="stylesheet" type="text/css">
+    <link href="styles/tabmenu.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Adding libraries -->
+
+    <!--jQuery -->
+    <script type="text/javascript" src="libs/jquery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="libs/jquery/jquery.mousewheel.js"></script>
+
+    <!-- Random -->
+    <script type="text/javascript" src="libs/random/Mash.js"></script>
+    <script type="text/javascript" src="libs/random/Alea.js"></script>
+
+    <!--WebGL-->
+    <script type="text/javascript" src="libs/detector/Detector.js"></script>
+    <script type="text/javascript" src="libs/requestAnimationFrame/RequestAnimationFrame.js"></script>
+
+    <!--  Threejs -->
+    <script type="text/javascript" src="libs/threejs/three.min.js"></script>
+    <script type="text/javascript" src="libs/SkyShader.js"></script>
+    <script type="text/javascript" src="libs/threejs/controls/OrbitControls.js"></script>
+    <script type="text/javascript" src="libs/threejs/renderers/Projector.js"></script>
+    <script type="text/javascript" src="libs/threejs/octree/threeoctree.js"></script>
+
+    <script type="text/javascript" src="libs/fileSavers/FileSaver.js"></script>
+    <script type="text/javascript" src="libs/fileSavers/ReadFile.js"></script>
+    <script type="text/javascript" src="libs/fileSavers/Canvas2Blob.js"></script>
+
+    <script src="libs/slider/simple-slider.js"></script>
+
+    <script type="text/javascript" src="UtilFuns.js"></script>
+    
+    <script type="text/javascript" src="AnimInteraction.js"></script>
+    <script type="text/javascript" src="ViewportManage.js"></script>
+
+    <!-- Terrain generator algos -->
+    <script type="text/javascript" src="algos/DiamondSquare.js"></script>
+    <script type="text/javascript" src="algos/PerlinNoise.js"></script>
+    <script type="text/javascript" src="algos/SimplexNoise.js"></script>
+
+    <script type="text/javascript" src="index.js"></script>
+
+</head>
+
+<body>
+
+    <!-- VIEWPORT -->
+    <div id="viewport"></div>
+
+    <!-- TABS -->
+    <div class="tabs">
+
+        <div id='cssmenu'>
+
+            <div id="bg-one"></div>
+            <div id="bg-three"></div>
+
+            <ul class="tab-links">
+                <li class='active' id="singlelink"><a href='#properties'><span>Terrain Properties</span></a></li>
+                <li id="singlelink"><a href='#edit'><span>Edit</span></a></li>
+                <li id="singlelink"><a href='#export'><span>Export/Import</span></a></li>
+                <!--<li id="singlelink"><a href='#'><span>Terminal</span></a></li>-->
+            </ul>
+
+        </div>
+        <div style="
+            background: #D6DBE9;
+            opacity: 0.9;
+            top: 30px;
+            position: absolute;
+            width: 100%;
+            height: 140px;
+            ">
+
+        </div>
+
+        <div class="tab-content">
+
+            <!-- Terrain Properties tab -->
+            <div id="properties" class="tab active">
+
+                <div class="dg">
+                    <form id="algos">
+                        <select>
+                            <option>Diamond Square</option>
+                            <option selected>Perlin Noise</option>
+                            <option>Simplex Noise</option>
+                        </select>
+                    </form>
+                    <ul id="zoneul">
+                        <li style=" width: 175px; margin-left: 26px;">
+                            <button class=" button" id="GenerateTerrain">
+                                <span class="icon-graph"> Generate Terrain</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Menu for textures-->
+                <div class="dg">
+                    <ul id="zoneul">
+                        <li>
+                            <div class="textures">
+
+                                <div class="texturebutton" id="wf" title="wireframe"> </div>
+
+                                <div class="texturebutton active" id="gr" title="grass"> </div>
+                                <div class="texturebutton" id="rc" title="rocks"> </div>
+                                <div class="texturebutton" id="snd" title="sand"> </div>
+                                <div class="texturebutton" id="bandw" title="black and white"> </div>
+
+                                <div class="texturebutton" id="shader" title="shader material"> </div>
+                                <div class="texturebutton" id="shader2" title="shader material"> </div>
+
+                                <div style="display:inline-block;">
+                                    <input type="file" id="importtexture" style="display:none;">
+                                    <div class="texturebutton" id="imptext" title="import texture"
+                                         style="cursor: pointer;">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Properties 1 -->
+                <div class="dg">
+                    <ul id="zoneul">
+
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">width</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input type="text" data-slider="true" id="width" value="512"
+                                           data-slider-highlight="true" data-slider-values="256, 512, 1024, 2048, 4096" data-slider-snap="true">
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="cr number has-slider">
+                            <div>
+                                <span class="property-name">height</span>
+                                <div class="c">
+                                    <div class="slider" style="display:flex;">
+                                        <input type="text" data-slider="true" id="height" value="512"
+                                               data-slider-highlight="true" data-slider-values="256, 512, 1024, 2048, 4096" data-slider-snap="true">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">depth</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input id="depth" type="text" data-slider="true" value="1" data-slider-highlight="true" data-slider-range="1, 10" data-slider-step="1">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Properties 2 -->
+                <div class="dg">
+                    <ul id="zoneul">
+
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">width segments</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input id="widthsegments" type="text" data-slider="true" value="64"
+                                           data-slider-highlight="true" data-slider-values="4,8,16,32,64,128,256,512" data-slider-snap="true">
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">height segments</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input id="heightsegments" type="text" data-slider="true" value="64"
+                                           data-slider-highlight="true" data-slider-values="4,8,16,32,64,128,256,512" data-slider-snap="true">
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">fog density</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input id="fogdensity" type="text" data-slider="true" value="2"
+                                           data-slider-highlight="true" data-slider-range="2, 20" data-slider-snap="true" data-slider-step="2">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Properties 3 -->
+                <div class="dg">
+                    <ul id="zoneul">
+                        <li class="cr number">
+                            <div>
+                                <input id="destructure" type="checkbox">
+                                <label class="checkbox" for="Option"> destructure effect </label>
+                            </div>
+                        </li>
+
+                        <li class="cr number">
+                            <div>
+                                <input id="water" type="checkbox">
+                                <label class="checkbox" for="Option"> water </label>
+                            </div>
+                        </li>
+
+                        <li class="cr number">
+                            <div>
+                                <input id="fog" type="checkbox">
+                                <label class="checkbox" id="fog" for="Option"> fog </label>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Edit tab -->
+            <div id="edit" class="tab">
+
+                <div class="dg" style="width: 120px;">
+                    <ul id="zoneul">
+                        <li id="raiselower">
+                            <div class="editor">
+                                <div class="toolbutton" id="raise_lower" title="raise/lower terrain">  </div>
+
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="dg">
+
+                    <ul id="zoneul">
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">brush size</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input id="brushsize" type="text" data-slider="true" value="5"
+                                           data-slider-highlight="true" data-slider-values="5, 10, 15, 20" data-slider-snap="true">
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <ul id="zoneul">
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">brush strength</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input id="brushstrength" type="text" data-slider="true" value="1"
+                                           data-slider-highlight="true" data-slider-range="1, 10" data-slider-step="1" data-slider-snap="true">
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <ul id="zoneul">
+                        <li class="cr number has-slider">
+                            <div><span class="property-name">max height</span></div>
+                            <div class="c">
+                                <div class="slider" style="display:flex;">
+                                    <input id="maxLimit" type="text" data-slider="true" value="200"
+                                           data-slider-highlight="true" data-slider-snap="true" data-slider-range="150, 400" data-slider-step="50">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Export tab -->
+            <div id="export" class="tab">
+
+                <div class="export-list" id="menu">
+                    <ul>
+                        <!-- EXPORT BUTTONS -->
+                        <li>
+                            <a href="#">Export</a>
+                            <ul>
+                                <li>
+                                    <button class="export button" id="Export">
+                                        <span class="icon-upload"> Export as json</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="export button" id="ExportAsObj">
+                                        <span class="icon-upload"> Export as OBJ</span>
+                                    </button>
+                                </li>
+                                <!--<li>
+                                    <button class="export button" id="ExportAsHeight">
+                                        <span class="icon-upload"> Export as HeightMap</span>
+                                    </button>
+                                </li>-->
+                            </ul>
+                        </li>
+
+                        <!-- IMPORT BUTTON -->
+                        <li>
+                            <input type="file" id="importfile" style="display:none;">
+                            <button class="export-button" id="Import"
+                                    style="border-radius: 2px 2px 2px 2px; border: none; width:168px; background-color: #293955; color: white; cursor: pointer; display: inline-block; font: 13px 'Consolas', sans-serif; line-height: 20px; margin-bottom: 0; padding: 7px 10px; text-transform: none; -moz-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; -webkit-transition: all 0.3s ease 0s; transition: all 0.3s ease 0s;">
+                                <span class="icon-download"> Import</span>
+                            </button>
+
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        $(document).ready(function () {
+
+            $('#imptext').click(function () {
+                $('#importtexture').click();
+            });
+
+            $('#importtexture').change(function (event) {
+                var file = event.target.files[0];
+
+                if (file != null) {
+
+                    if (file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/bmp" || file.type === "image/tiff")
+
+                        Terrain.generated._textureUrl =
+                            URL.createObjectURL(event.target.files[0]);
+                    else openModalDialog("You have to select an image file.");
+                }
+
+                Terrain.id = "textureimported";
+
+                Terrain.generated._changeTexture(Terrain.id);
+            });
+
+        });
+    </script>
+
+
+    <!-- Slider script  -->
+    <script>
+        $("[data-slider]").each(function () {
+            var input = $(this);
+            $("<span>")
+              .addClass("output")
+            .insertAfter($(this));
+
+        }).bind("slider:ready slider:changed", function (event, data) {
+            $(this)
+              .nextAll(".output:first")
+              .html(data.value.toFixed(0));
+            initParameters();
+        });
+    </script>
+
+    <script id="groundVertexShader" type="application/x-glsl">
+
+        attribute float displacement;
+
+        varying vec2 vUv;
+        varying vec3 vPosition;
+
+        void main( void ) {
+
+        vUv = uv;
+        vPosition = position;
+
+        vPosition.z = displacement;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
+
+        }
+
+    </script>
+
+    <script id="groundFragmentShader" type="application/x-glsl">
+
+        uniform sampler2D texture_grass;
+        uniform sampler2D texture_bare;
+        uniform sampler2D texture_snow;
+
+        uniform float maxLimit;
+
+        bool wireframe;
+        uniform bool show_ring;
+        uniform bool fog;
+        uniform float ring_width;
+        uniform vec4 ring_color;
+        uniform vec3 ring_center;
+        uniform float ring_radius;
+        uniform float fogDensity;
+        vec4 fogColor = vec4(1,1,1,0);
+
+        varying vec2 vUv;
+        varying vec3 vPosition;
+
+
+        float dist_falloff(float distance, float falloff) {
+        float alpha = (falloff - distance) / falloff;
+
+        if (alpha < 0.0) {
+        alpha = 0.0;
+        }
+        if (alpha > 1.0) {
+        alpha = 1.0;
+        }
+        return alpha;
+        }
+
+        vec3 layerColor(vec3 color1, vec3 color2, float alpha) {
+            return mix( color1, color2, alpha);
+        }
+
+        void main()
+        {
+
+        if (wireframe){
+        gl_FragColor =  vec4(0.0, 0.0, 0.0, .7);
+        }
+
+        else {
+        // Texture loading
+        vec3 diffuseBare = texture2D( texture_bare, vUv ).rgb;
+        vec3 diffuseGrass = texture2D( texture_grass, vUv ).rgb;
+        vec3 diffuseSnow = texture2D( texture_snow, vUv ).rgb;
+
+        // Get base texture
+        vec3 fragcolor = diffuseBare;
+
+        // Grass texture
+        fragcolor = layerColor(
+        fragcolor,
+        diffuseGrass,
+        dist_falloff(abs(vPosition.z - 20.0), 90.0)
+        );
+
+        // Ice texture
+        fragcolor = layerColor(
+        fragcolor,
+        diffuseSnow,
+        dist_falloff(abs(vPosition.z - maxLimit), 90.0)
+        );
+
+        gl_FragColor = vec4(fragcolor, 2.0);
+        }
+        float distance = sqrt((vPosition.x - ring_center.x) * (vPosition.x - ring_center.x) + (vPosition.y - ring_center.y) * (vPosition.y - ring_center.y));
+
+
+        if (fog) {
+
+        const float LOG2 = 1.442695;
+        float z = gl_FragCoord.z / gl_FragCoord.w;
+        float fogFactor = exp2( -fogDensity * fogDensity * z * z *  LOG2 );
+        fogFactor = clamp(fogFactor, 0.0, 1.0);
+
+        gl_FragColor = mix(fogColor, gl_FragColor, fogFactor );
+
+        }
+
+        // Grid overlay
+        if (show_ring){
+            if (distance < ring_radius) {
+                float tiles = 1.0 / 100.0;
+                float val = mod(vUv.y, tiles);
+                if (mod(vUv.x, tiles) < .003 || mod(vUv.y, tiles) < .003) {
+                    gl_FragColor = gl_FragColor * (distance / 1.0);
+                    gl_FragColor.r = 213.0;
+                    gl_FragColor.g = 218.0;
+                    gl_FragColor.b = 232.0;
+                }
+            }
+        }
+
+        }
+
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentshaderline">
+
+        void main() {
+        gl_FragColor =  vec4(0.0, 0.0, 0.0, .7);
+        }
+    </script>
+
+
+    <script id="waterVertexShader" type="application/x-glsl">
+
+        attribute float displacement;
+
+        varying float vDisplacement;
+        varying vec2 vUv;
+        varying vec3 vPosition;
+
+        void main( void ) {
+
+        vDisplacement = displacement;
+        vUv = uv;
+        vPosition = position;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1);
+
+        }
+
+    </script>
+
+    <script id="waterFragmentShader" type="application/x-glsl">
+
+        uniform float water_level;
+        uniform float time;
+
+        varying float vDisplacement;
+        varying vec2 vUv;
+        varying vec3 vPosition;
+
+        void main()
+        {
+
+        // Base Color
+        gl_FragColor = vec4(0.5, 0.7, 1.0, .7);
+
+        float low_tide = sin(radians(time / 100.0)); // Mostly animation speed
+
+        // Determine at what point the elevation must be for the foam to display
+        low_tide -= 5.5;
+        low_tide *= 1.3;
+
+        if (vDisplacement > low_tide + water_level) {
+        gl_FragColor = mix( gl_FragColor, vec4(1.0, 1.0, 1.0, 1.0),.6);
+        }
+        }
+    </script>
+
+</body>
+
+</html>
+-

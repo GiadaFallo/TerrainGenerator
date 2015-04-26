@@ -1,0 +1,40 @@
+.slider {
+     width: 120px;
+}
+
+    .slider > .dragger {
+        background:#293955;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        border: 1px solid #293955;
+        width: 16px;
+        height: 16px;
+        margin-top: -12px;
+        margin-left: -12px;
+    }
+
+    .slider > .track, .slider > .highlight-track {
+        background: #686868;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        height: 4px;
+    }
+
+.slider > .highlight-track {
+	background: #293955;
+}
+
+.output {
+    color: #1F1F1F;
+    font-size: 14px;
+    padding-top: 1px;
+    margin-left: 5px;
+    vertical-align: top;
+    width:75px;
+}
+
+select::-ms-expand {
+    display: none;
+}
